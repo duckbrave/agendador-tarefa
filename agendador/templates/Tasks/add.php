@@ -22,7 +22,7 @@
                     echo $this->Form->control(fieldName: 'completed');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Enviar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

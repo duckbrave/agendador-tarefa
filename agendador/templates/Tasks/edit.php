@@ -9,11 +9,11 @@
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Form->postLink(
-                __('Delete'),
+                __('Deletar'),
                 ['action' => 'delete', $task->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $task->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Você quer mesmo deletar a tarefa {0}?', $task->id), 'class' => 'side-nav-item']
             ) ?>
-            <?= $this->Html->link(__('List Tasks'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Listar tarefas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column column-80">
@@ -27,7 +27,7 @@
                     echo $this->Form->control('completed');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Enviar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
