@@ -29,7 +29,7 @@ use Cake\Validation\Validator;
 class TarefasTable extends Table
 {
     /**
-     * Initialize method
+     * Initialize methods
      *
      * @param array $config The configuration for the Table.
      * @return void

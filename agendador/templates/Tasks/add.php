@@ -7,19 +7,19 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Tasks'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <h4 class="heading"><?= __('Ações') ?></h4>
+            <?= $this->Html->link(__('Lista de tarefas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column column-80">
         <div class="tasks form content">
             <?= $this->Form->create($task) ?>
             <fieldset>
-                <legend><?= __('Add Task') ?></legend>
+                <legend><?= __('Adicionar tarefa') ?></legend>
                 <?php
                     echo $this->Form->control('title');
                     echo $this->Form->control('description');
-                    echo $this->Form->control('completed');
+                    echo $this->Form->control(fieldName: 'completed');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

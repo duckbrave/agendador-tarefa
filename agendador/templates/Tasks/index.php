@@ -16,7 +16,7 @@
                     <th><?= $this->Paginator->sort('completed', title:'Completado') ?></th>
                     <th><?= $this->Paginator->sort('created', title:'Criado') ?></th>
                     <th><?= $this->Paginator->sort('modified', title:'Modificado') ?></th>
-                    <th class="actions"><?= __('Actions', title:'Ações') ?></th>
+                    <th class="actions"><?= __('Ações') ?></th>
                 </tr>
             </thead>
             <tbody>
