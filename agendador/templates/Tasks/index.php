@@ -5,18 +5,18 @@
  */
 ?>
 <div class="tasks index content">
-    <?= $this->Html->link(__('New Task'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Tasks') ?></h3>
+    <?= $this->Html->link(__('Nova Tarefa'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Tarefas') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('title') ?></th>
-                    <th><?= $this->Paginator->sort('completed') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('id', title:'Código') ?></th>
+                    <th><?= $this->Paginator->sort('title', title:'Título') ?></th>
+                    <th><?= $this->Paginator->sort('completed', title:'Completado') ?></th>
+                    <th><?= $this->Paginator->sort('created', title:'Criado') ?></th>
+                    <th><?= $this->Paginator->sort('modified', title:'Modificado') ?></th>
+                    <th class="actions"><?= __('Actions', title:'Ações') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,14 +28,14 @@
                     <td><?= h($task->created) ?></td>
                     <td><?= h($task->modified) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $task->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $task->id]) ?>
+                        <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $task->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $task->id]) ?>
                         <?= $this->Form->postLink(
-                            __('Delete'),
+                            __('Deletar'),
                             ['action' => 'delete', $task->id],
                             [
                                 'method' => 'delete',
-                                'confirm' => __('Are you sure you want to delete # {0}?', $task->id),
+                                'confirm' => __('Você quer mesmo deletar a tarefa {0}?', $task->id),
                             ]
                         ) ?>
                     </td>
@@ -47,11 +47,11 @@
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('Proximo') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Página {{page}} de {{pages}}, visualizando {{current}} registro(s) de {{count}} total')) ?></p>
     </div>
 </div>
