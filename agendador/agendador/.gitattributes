@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Auto detect text files and perform LF normalization
-* text=auto
-=======
 # Define the line ending behavior of the different file extensions
 # Set default behavior, in case users don't have core.autocrlf set.
 * text text=auto eol=lf
@@ -38,4 +34,3 @@
 *.webm binary
 *.mp4 binary
 *.ogv binary
->>>>>>> de47eb3 (interface de login com hash e cadastro)
