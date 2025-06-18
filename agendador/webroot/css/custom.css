@@ -41,7 +41,7 @@ table th,
 table td {
     border: 1px, 1px solid #404041; /* Bordas sutis para as células da tabela */
     padding: 10px;
-    text-align: left;
+    text-align: center;
 }
 
 table th {
