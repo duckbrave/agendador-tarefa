@@ -53,14 +53,14 @@ cp config/app.php
 
 - Edite config/app_local.php com suas credenciais:
 
-    'Datasources' => [
+  ```  'Datasources' => [
         'default' => [
             'host' => 'localhost',
             'username' => 'SEU_USUARIO_POSTGRES',
             'password' => 'SUA_SENHA_POSTGRES',
             'database' => 'agendador',
         ],
-    ],
+    ],```
 
 Edite config/app.php com suas credenciais:
 
