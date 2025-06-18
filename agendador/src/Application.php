@@ -1,19 +1,6 @@
 <?php
 declare(strict_types=1);
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link      https://cakephp.org CakePHP(tm) Project
- * @since     3.3.0
- * @license   https://opensource.org/licenses/mit-license.php MIT License
- */
 namespace App;
 
 use Cake\Core\Configure;
@@ -27,6 +14,15 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Routing\Router;
+use Psr\Http\Message\ServerRequestInterface;
+
+// Imports do Plugin de Autenticação
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+// AQUI ESTÁ A CORREÇÃO: O namespace correto para o Middleware
+use Authentication\Middleware\AuthenticationMiddleware;
 
 /**
  * Application setup class.
@@ -36,7 +32,7 @@ use Cake\Routing\Middleware\RoutingMiddleware;
  *
  * @extends \Cake\Http\BaseApplication<\App\Application>
  */
-class Application extends BaseApplication
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -75,24 +71,57 @@ class Application extends BaseApplication
             ]))
 
             // Add routing middleware.
-            // If you have a large number of routes connected, turning on routes
-            // caching in production could improve performance.
-            // See https://github.com/CakeDC/cakephp-cached-routing
             ->add(new RoutingMiddleware($this))
 
-            // Parse various types of encoded request bodies so that they are
-            // available as array through $request->getData()
-            // https://book.cakephp.org/5/en/controllers/middleware.html#body-parser-middleware
+            // Adiciona o middleware de autenticação usando a classe com o namespace correto
+            ->add(new AuthenticationMiddleware($this))
+
+            // Parse various types of encoded request bodies.
             ->add(new BodyParserMiddleware())
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
-            // https://book.cakephp.org/5/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
             ->add(new CsrfProtectionMiddleware([
                 'httponly' => true,
             ]));
 
         return $middlewareQueue;
     }
+    
+    /**
+     * Retorna um serviço de autenticação.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Requisição.
+     * @return \Authentication\AuthenticationServiceInterface
+     */
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+        $authenticationService = new AuthenticationService([
+            // Redireciona usuários não autenticados para a página de login
+            'unauthenticatedRedirect' => Router::url(['controller' => 'Users', 'action' => 'login']),
+            'queryParam' => 'redirect',
+        ]);
+
+        // Carrega o identificador. Ele diz COMO encontrar um usuário.
+        $authenticationService->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                'username' => 'email',
+                'password' => 'password',
+            ],
+        ]);
+
+        // Carrega os autenticadores. Eles dizem COMO um usuário faz login.
+        $authenticationService->loadAuthenticator('Authentication.Session'); // Para manter o login na sessão
+        $authenticationService->loadAuthenticator('Authentication.Form', [    // Para o formulário de login
+            'fields' => [
+                'username' => 'email',
+                'password' => 'password',
+            ],
+            'loginUrl' => Router::url(['controller' => 'Users', 'action' => 'login']),
+        ]);
+
+        return $authenticationService;
+    }
+
 
     /**
      * Register application container services.

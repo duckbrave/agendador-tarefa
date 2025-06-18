@@ -39,6 +39,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <div class="top-nav-title">
             <a href="<?= $this->Url->build('/') ?>"><span>Agendador de </span>Tarefas</a>
         </div>
+        <div class="top-nav-links">
+            <?php
+                // Pega a identidade do usuário logado a partir da requisição
+                $identity = $this->request->getAttribute('identity');
+                // Se o usuário estiver logado, exibe o link de Logout
+                if ($identity) {
+                    echo $this->Html->link(
+                        'Logout',
+                        ['controller' => 'Users', 'action' => 'logout']
+                    );
+                }
+            ?>
+        </div>
     </nav>
     <main class="main">
         <div class="container">

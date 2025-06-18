@@ -8,18 +8,25 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-// ... (código anterior)
-
 class TasksTable extends Table
 {
-    // ... (método initialize)
+    public function initialize(array $config): void
+    {
+        parent::initialize($config);
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
+        $this->setTable('tasks');
+        $this->setDisplayField('title');
+        $this->setPrimaryKey('id');
+
+        $this->addBehavior('Timestamp');
+
+        // Adiciona a associação com a tabela Users
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
+        ]);
+    }
+
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -40,6 +47,20 @@ class TasksTable extends Table
             ->date('data_agendada')
             ->allowEmptyDate('data_agendada');
 
+        // Validação para o user_id
+        $validator
+            ->integer('user_id')
+            ->requirePresence('user_id', 'create')
+            ->notEmptyString('user_id');
+
         return $validator;
+    }
+
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        // Garante que o user_id fornecido existe na tabela users
+        $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
+
+        return $rules;
     }
 }

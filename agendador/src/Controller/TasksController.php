@@ -3,96 +3,77 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-/**
- * Tasks Controller
- *
- * @property \App\Model\Table\TasksTable $Tasks
- */
 class TasksController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
     public function index()
     {
-        $query = $this->Tasks->find();
+        // Filtra as tarefas para mostrar apenas as do usuário logado
+        $query = $this->Tasks->find()
+            ->where(['Tasks.user_id' => $this->Authentication->getIdentity()->get('id')]);
+        
         $tasks = $this->paginate($query);
-
         $this->set(compact('tasks'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Task id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
-        $task = $this->Tasks->get($id, contain: []);
+        // Garante que o usuário só possa ver suas próprias tarefas
+        $task = $this->Tasks->get($id, [
+            'contain' => [],
+            'conditions' => ['Tasks.user_id' => $this->Authentication->getIdentity()->get('id')]
+        ]);
         $this->set(compact('task'));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $task = $this->Tasks->newEmptyEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
+            // Define o user_id da tarefa com o id do usuário logado
+            $task->user_id = $this->Authentication->getIdentity()->get('id');
+            
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
-
+                $this->Flash->success(__('A tarefa foi salva.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            $this->Flash->error(__('A tarefa não pôde ser salva. Tente novamente.'));
         }
         $this->set(compact('task'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Task id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function edit($id = null)
     {
-        $task = $this->Tasks->get($id, contain: []);
+        // Garante que o usuário só possa editar suas próprias tarefas
+        $task = $this->Tasks->get($id, [
+            'contain' => [],
+            'conditions' => ['Tasks.user_id' => $this->Authentication->getIdentity()->get('id')]
+        ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
+            // O user_id não precisa ser redefinido aqui, pois já pertence ao usuário
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
-
+                $this->Flash->success(__('A tarefa foi salva.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            $this->Flash->error(__('A tarefa não pôde ser salva. Tente novamente.'));
         }
         $this->set(compact('task'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Task id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $task = $this->Tasks->get($id);
+        // Garante que o usuário só possa deletar suas próprias tarefas
+        $task = $this->Tasks->get($id, [
+            'conditions' => ['Tasks.user_id' => $this->Authentication->getIdentity()->get('id')]
+        ]);
+        
         if ($this->Tasks->delete($task)) {
-            $this->Flash->success(__('The task has been deleted.'));
+            $this->Flash->success(__('A tarefa foi deletada.'));
         } else {
-            $this->Flash->error(__('The task could not be deleted. Please, try again.'));
+            $this->Flash->error(__('A tarefa não pôde ser deletada. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

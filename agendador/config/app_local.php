@@ -33,34 +33,37 @@ return [
      *
      * See app.php for more configuration options.
      */
-    'Datasources' => [
+   'Datasources' => [
     'default' => [
-        'driver' => Cake\Database\Driver\Postgres::class,
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Postgres',
         'persistent' => false,
         'host' => 'localhost',
-        'port' => '5432',
-        'username' => 'usuario',
-        'password' => 'usuario',
+        'username' => 'postgres',
+        'password' => 'postgres',
         'database' => 'agendador',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
+        // Adicione a linha abaixo para forçar o schema 'public'
+        'init' => ['SET search_path TO public'],
         'cacheMetadata' => true,
         'quoteIdentifiers' => false,
-        'disableSchemaCache' => true,
     ],
+
     'test' => [
-        'driver' => Cake\Database\Driver\Postgres::class,
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Postgres',
         'persistent' => false,
         'host' => 'localhost',
-        'port' => '5432',
-        'username' => 'usuario',
-        'password' => 'usuario',
-        'database' => 'agendador', // ou crie um banco de testes separado
+        'username' => 'postgres',
+        'password' => 'postgres',
+        'database' => 'agendador',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
+        // Adicione a linha abaixo aqui também
+        'init' => ['SET search_path TO public'],
         'cacheMetadata' => true,
         'quoteIdentifiers' => false,
-        'log' => false,
     ],
 ],
 
