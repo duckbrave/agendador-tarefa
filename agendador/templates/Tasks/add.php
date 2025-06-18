@@ -17,10 +17,13 @@
             <fieldset>
                 <legend><?= __('Adicionar tarefa') ?></legend>
                 <?php
-                    echo $this->Form->control('title');
-                    echo $this->Form->control('description');
+                    echo $this->Form->control('title' , options: ['label' => 'Título']);
+                    echo $this->Form->control('description', options: ['type' => 'textarea', 'label' => 'Descrição']);
                     echo $this->Form->control('data_agendada', ['empty' => true, 'label' => 'Data Agendada']);
-                    echo $this->Form->control('completed');
+                    echo $this->Form->control('completed', [
+                        'type' => 'checkbox',
+                        'label' => 'Finalizado'
+                    ]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Enviar')) ?>

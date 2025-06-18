@@ -26,6 +26,15 @@ input[type="submit"] {
     ); /* Garante que o texto do botão seja branco para contraste */
 }
 
+input[type="text"],
+#description,
+#data-agendada,
+#email,
+#password {
+    background-color: lavender;
+    color: #333;
+}
+
 /* Estiliza a tabela principal de tarefas com preto */
 table {
     background-color: var(--color-task-table);

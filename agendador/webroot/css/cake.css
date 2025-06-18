@@ -1,7 +1,7 @@
 /* Milligram overrides */
 :root {
     /* The following are official CakePHP colors */
-    --color-cakephp-red: #d33c43;
+    --color-cakephp-red: #1b37b3;
     --color-cakephp-gray: #404041;
     --color-cakephp-blue: #2f85ae;
     --color-cakephp-lightblue: #34bdd7;
@@ -32,7 +32,11 @@
     --color-message-info-border: #6cb2eb;
 }
 
-.button, button, input[type='button'], input[type='reset'], input[type='submit'] {
+.button,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
     background-color: var(--color-cakephp-red);
     border-color: var(--color-cakephp-red);
 }
@@ -45,11 +49,21 @@ body {
 
 .top-nav-links,
 .side-nav,
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "Raleway", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 400;
     color: var(--color-headings);
 }
@@ -149,7 +163,7 @@ th {
 
 /* Flash messages */
 .message {
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     background: var(--color-message-info-bg);
     color: var(--color-message-info-text);
     border-color: var(--color-message-info-border);
@@ -182,7 +196,7 @@ th {
 .input.radio,
 .input.checkbox,
 .input.multicheckbox {
-    margin-bottom: 2.0rem;
+    margin-bottom: 2rem;
 }
 .input.radio input,
 .input.checkbox input,
@@ -199,11 +213,11 @@ th {
 .input.radio label > input,
 .input.checkbox label > input,
 .input.multicheckbox label > input {
-    margin-right: 1.0rem;
+    margin-right: 1rem;
 }
-input[type='color'] {
+input[type="color"] {
     max-width: 4rem;
-    padding: 0.3rem .5rem 0.3rem;
+    padding: 0.3rem 0.5rem 0.3rem;
 }
 
 /* Paginator */
@@ -234,7 +248,7 @@ input[type='color'] {
     padding: 0;
     position: relative;
     text-decoration: none;
-    transition: background .3s,color .3s;
+    transition: background 0.3s, color 0.3s;
 }
 .pagination li.active a,
 .pagination a:hover {
@@ -249,7 +263,7 @@ input[type='color'] {
 .prev a,
 .next a,
 .last a {
-    padding: 0 .75rem;
+    padding: 0 0.75rem;
 }
 .disabled a:hover {
     background: initial;
@@ -273,9 +287,9 @@ input[type='color'] {
 
 @media screen and (max-width: 640px) {
     /* Fix milligram not having a responsive column system */
-    .row .column[class*='column-'] {
+    .row .column[class*="column-"] {
         flex: 0 0 100%;
-        max-width: 100%
+        max-width: 100%;
     }
     .top-nav {
         margin: 0 auto;

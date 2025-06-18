@@ -27,8 +27,8 @@
                         <td><?= h($task->title) ?></td>
                         <td><?= $task->completed ? __('Sim') : __('Não') ?></td>
                         <td><?= h($task->data_agendada ? $task->data_agendada->format('d/m/Y') : '') ?></td>
-                        <td><?= h($task->created) ?></td>
-                        <td><?= h($task->modified) ?></td>
+                        <td><?= h($task->created ? $task->created->format('d/m/Y') : '') ?></td>
+                        <td><?= h($task->modified ? $task->modified->format('d/m/Y') : '') ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $task->id]) ?>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $task->id]) ?>

@@ -19,11 +19,11 @@
             <h3><?= h($task->title) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Title') ?></th>
+                    <th><?= __('Titulo') ?></th>
                     <td><?= h($task->title) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
+                    <th><?= __('Codigo') ?></th>
                     <td><?= $this->Number->format($task->id) ?></td>
                 </tr>
                 <tr>
@@ -31,20 +31,20 @@
                     <td><?= h($task->data_agendada ? $task->data_agendada->format('d/m/Y') : '') ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($task->created) ?></td>
+                    <th><?= __('Criado') ?></th>
+                    <td><?= h($task->created ? $task->created->format('d/m/Y') : '') ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($task->modified) ?></td>
+                    <th><?= __('Modificado') ?></th>
+                    <td><?= h($task->modified ? $task->modified->format('d/m/Y') : '') ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Completed') ?></th>
-                    <td><?= $task->completed ? __('Yes') : __('No'); ?></td>
+                    <th><?= __('Finalizado') ?></th>
+                    <td><?= $task->completed ? __('Sim') : __('Não'); ?></td>
                 </tr>
             </table>
             <div class="text">
-                <strong><?= __('Description') ?></strong>
+                <strong><?= __('Descrição') ?></strong>
                 <blockquote>
                     <?= $this->Text->autoParagraph(h($task->description)); ?>
                 </blockquote>

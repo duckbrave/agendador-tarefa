@@ -46,7 +46,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 // Se o usuário estiver logado, exibe o link de Logout
                 if ($identity) {
                     echo $this->Html->link(
-                        'Logout',
+                        'Sair',
                         ['controller' => 'Users', 'action' => 'logout']
                     );
                 }
