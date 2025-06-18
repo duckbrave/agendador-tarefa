@@ -29,13 +29,18 @@ Antes de começar, você precisa ter os seguintes softwares instalados:
 ### 1. Clone o Repositório
 
 git clone https://github.com/duckbrave/agendador-tarefa.git
+
 cd agendador-tarefa
+
+cd agendador (Local onde está o projeto e onde deve estara rodando composer)
 
 ### 2. Instale as Dependências
 
 ```composer install```
 
 ```composer require cakephp/authentication```
+
+```bin/cake migrations migrate ```
 
 ### 3. Configure o Banco de Dados
 
