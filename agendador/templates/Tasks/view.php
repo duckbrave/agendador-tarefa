@@ -27,6 +27,10 @@
                     <td><?= $this->Number->format($task->id) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Data Agendada') ?></th>
+                    <td><?= h($task->data_agendada) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Created') ?></th>
                     <td><?= h($task->created) ?></td>
                 </tr>

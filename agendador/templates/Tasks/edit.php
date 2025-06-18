@@ -24,6 +24,7 @@
                 <?php
                     echo $this->Form->control('title');
                     echo $this->Form->control('description');
+                    echo $this->Form->control('data_agendada', ['empty' => true, 'label' => 'Data Agendada']);
                     echo $this->Form->control('completed');
                 ?>
             </fieldset>

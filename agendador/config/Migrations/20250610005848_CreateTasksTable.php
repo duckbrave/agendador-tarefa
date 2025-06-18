@@ -36,6 +36,12 @@ class CreateTasksTable extends AbstractMigration
             'null' => false,
         ]);
 
+        // Adiciona a coluna para a data de agendamento
+        $table->addColumn('data_agendada', 'date', [
+            'default' => null,
+            'null' => true,
+        ]);
+
         // Adiciona colunas de data e hora automaticamente gerenciadas pelo CakePHP
         $table->addTimestamps('created', 'modified');
 

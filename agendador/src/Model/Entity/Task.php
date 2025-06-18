@@ -12,6 +12,7 @@ use Cake\ORM\Entity;
  * @property string $title
  * @property string|null $description
  * @property bool $completed
+ * @property \Cake\I18n\Date|null $data_agendada
  * @property \Cake\I18n\DateTime $created
  * @property \Cake\I18n\DateTime|null $modified
  */
@@ -30,7 +31,9 @@ class Task extends Entity
         'title' => true,
         'description' => true,
         'completed' => true,
+        'data_agendada' => true,
         'created' => true,
         'modified' => true,
     ];
 }
+

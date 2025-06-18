@@ -19,7 +19,8 @@
                 <?php
                     echo $this->Form->control('title');
                     echo $this->Form->control('description');
-                    echo $this->Form->control(fieldName: 'completed');
+                    echo $this->Form->control('data_agendada', ['empty' => true, 'label' => 'Data Agendada']);
+                    echo $this->Form->control('completed');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Enviar')) ?>

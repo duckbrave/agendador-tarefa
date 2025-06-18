@@ -8,43 +8,11 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-/**
- * Tasks Model
- *
- * @method \App\Model\Entity\Task newEmptyEntity()
- * @method \App\Model\Entity\Task newEntity(array $data, array $options = [])
- * @method array<\App\Model\Entity\Task> newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Task get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
- * @method \App\Model\Entity\Task findOrCreate($search, ?callable $callback = null, array $options = [])
- * @method \App\Model\Entity\Task patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method array<\App\Model\Entity\Task> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Task|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \App\Model\Entity\Task saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method iterable<\App\Model\Entity\Task>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Task>|false saveMany(iterable $entities, array $options = [])
- * @method iterable<\App\Model\Entity\Task>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Task> saveManyOrFail(iterable $entities, array $options = [])
- * @method iterable<\App\Model\Entity\Task>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Task>|false deleteMany(iterable $entities, array $options = [])
- * @method iterable<\App\Model\Entity\Task>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Task> deleteManyOrFail(iterable $entities, array $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
- */
+// ... (código anterior)
+
 class TasksTable extends Table
 {
-    /**
-     * Initialize method
-     *
-     * @param array<string, mixed> $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config): void
-    {
-        parent::initialize($config);
-
-        $this->setTable('tasks');
-        $this->setDisplayField('title');
-        $this->setPrimaryKey('id');
-
-        $this->addBehavior('Timestamp');
-    }
+    // ... (método initialize)
 
     /**
      * Default validation rules.
@@ -67,6 +35,10 @@ class TasksTable extends Table
         $validator
             ->boolean('completed')
             ->notEmptyString('completed');
+
+        $validator
+            ->date('data_agendada')
+            ->allowEmptyDate('data_agendada');
 
         return $validator;
     }

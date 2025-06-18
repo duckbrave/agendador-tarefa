@@ -11,35 +11,37 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id', title:'Código') ?></th>
-                    <th><?= $this->Paginator->sort('title', title:'Título') ?></th>
-                    <th><?= $this->Paginator->sort('completed', title:'Completado') ?></th>
-                    <th><?= $this->Paginator->sort('created', title:'Criado') ?></th>
-                    <th><?= $this->Paginator->sort('modified', title:'Modificado') ?></th>
+                    <th><?= $this->Paginator->sort('id', title: 'Código') ?></th>
+                    <th><?= $this->Paginator->sort('title', title: 'Título') ?></th>
+                    <th><?= $this->Paginator->sort('completed', title: 'Completado') ?></th>
+                    <th><?= $this->Paginator->sort('data_agendada', 'Data Agendada') ?></th>
+                    <th><?= $this->Paginator->sort('created', title: 'Criado') ?></th>
+                    <th><?= $this->Paginator->sort('modified', title: 'Modificado') ?></th>
                     <th class="actions"><?= __('Ações') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($tasks as $task): ?>
-                <tr>
-                    <td><?= $this->Number->format($task->id) ?></td>
-                    <td><?= h($task->title) ?></td>
-                    <td><?= h($task->completed) ?></td>
-                    <td><?= h($task->created) ?></td>
-                    <td><?= h($task->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $task->id]) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $task->id]) ?>
-                        <?= $this->Form->postLink(
-                            __('Deletar'),
-                            ['action' => 'delete', $task->id],
-                            [
-                                'method' => 'delete',
-                                'confirm' => __('Você quer mesmo deletar a tarefa {0}?', $task->id),
-                            ]
-                        ) ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><?= $this->Number->format($task->id) ?></td>
+                        <td><?= h($task->title) ?></td>
+                        <td><?= $task->completed ? __('Sim') : __('Não') ?></td>
+                        <td><?= h($task->data_agendada) ?></td>
+                        <td><?= h($task->created) ?></td>
+                        <td><?= h($task->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $task->id]) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $task->id]) ?>
+                            <?= $this->Form->postLink(
+                                __('Deletar'),
+                                ['action' => 'delete', $task->id],
+                                [
+                                    'method' => 'delete',
+                                    'confirm' => __('Você quer mesmo deletar a tarefa {0}?', $task->id),
+                                ]
+                            ) ?>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
@@ -52,6 +54,7 @@
             <?= $this->Paginator->next(__('Proximo') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Página {{page}} de {{pages}}, visualizando {{current}} registro(s) de {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Página {{page}} de {{pages}}, visualizando {{current}} registro(s) de {{count}} total')) ?>
+        </p>
     </div>
 </div>
