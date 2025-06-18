@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Data Agendada') ?></th>
-                    <td><?= h($task->data_agendada) ?></td>
+                    <td><?= h($task->data_agendada ? $task->data_agendada->format('d/m/Y') : '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>

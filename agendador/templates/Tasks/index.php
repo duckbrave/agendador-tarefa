@@ -26,7 +26,7 @@
                         <td><?= $this->Number->format($task->id) ?></td>
                         <td><?= h($task->title) ?></td>
                         <td><?= $task->completed ? __('Sim') : __('Não') ?></td>
-                        <td><?= h($task->data_agendada) ?></td>
+                        <td><?= h($task->data_agendada ? $task->data_agendada->format('d/m/Y') : '') ?></td>
                         <td><?= h($task->created) ?></td>
                         <td><?= h($task->modified) ?></td>
                         <td class="actions">
