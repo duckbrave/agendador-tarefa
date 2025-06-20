@@ -1,5 +1,12 @@
 # 📅 Agendador de Tarefas
 
+Desenvolvido Guilherme Morigi(https://github.com/guilhermemorigi),
+Ivan Silva(https://github.com/duckbrave),
+Thiago Emanuel(https://github.com/ThiagoHeckler) 
+
+CakePHP 5.x
+PostgresSQL16
+
 Um simples, mas poderoso, agendador de tarefas construído com o framework **CakePHP 5.x**.  
 Esta aplicação permite que os usuários se cadastrem, façam login e gerenciem suas próprias listas de tarefas.
 
@@ -32,7 +39,7 @@ git clone https://github.com/duckbrave/agendador-tarefa.git
 
 cd agendador-tarefa
 
-cd agendador (Local onde está o projeto e onde deve estara rodando composer)
+cd agendador (Local onde está o projeto e onde deve estar rodando composer)
 
 ### 2. Instale as Dependências
 
@@ -40,7 +47,6 @@ cd agendador (Local onde está o projeto e onde deve estara rodando composer)
 
 ```composer require cakephp/authentication```
 
-```bin/cake migrations migrate ```
 
 ### 3. Configure o Banco de Dados
 
@@ -108,6 +114,7 @@ webroot/          → Assets públicos (CSS, JS)
 ## 📄 Licença
 
 Este projeto é referente trabalho de programação 3
+
 
 ---
 
